@@ -193,7 +193,7 @@ img{
     /* scroll-margin-top: 15vh; */
 }
 
-.form{
+.iform{
     height: 70%;
     width: 40%;
     background: rgb(114, 95, 114);
@@ -210,7 +210,7 @@ img{
     width: 90%;
     height: 10%;
     padding: 10px;
-    background-color: rgb(236, 224, 228);
+    ackground: transparent;
     font-weight: bold;
     font-size: large;
     color: rgb(0, 0, 0);
@@ -229,7 +229,7 @@ input{
     width: 90%;
     height: 30%;
     padding: 10px;
-    background-color: rgb(236, 224, 228);
+    ackground: transparent;
     font-weight: bold;
     font-size: large;
     color: rgb(0, 0, 0);
