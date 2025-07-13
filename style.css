@@ -9,7 +9,8 @@ html{
 }
 
 body{
-    background-color: darksalmon;
+    background-color: #0f172a;
+    color: #f1f5f9;
 }
 
 .header{
@@ -19,14 +20,13 @@ body{
     display: grid;
     background-color: black;
     position: fixed;
-    box-shadow:0px 0px 30px black;
+    /* box-shadow:0px 0px 10px #38bdf8; */
 }
 .header1{
-    color: rgb(195, 195, 219);
     width: 100%;
     height: 15vh;
-    display: grid;
-    background-color: rgb(88, 40, 40);
+    /* display: grid;
+    background-color: rgb(88, 40, 40); */
     z-index: -1;
 }
 
@@ -84,7 +84,7 @@ img{
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    box-shadow:0px 0px 30px rgb(1, 12, 5);
+    box-shadow:0px 0px 10px #38bdf8;
 }
 
 .about{
@@ -121,7 +121,7 @@ img{
     border-radius: 20px;
     font-size: large;
     border: none;
-    box-shadow:0px 0px 10px rgb(1, 12, 5);
+    box-shadow:0px 0px 10px #38bdf8;
     /* padding: 12px 20px;
     background: #facc15;
     color: #1f2937;
@@ -159,8 +159,9 @@ img{
     padding: 10px;
     margin: 20px;
     background: linear-gradient(135deg, #e9a2cb 0%, #1a89bd 100%);
+    color: #000;
     /* font-size: large; */
-    box-shadow:0px 0px 30px rgb(1, 12, 5);
+    box-shadow:0px 0px 10px #38bdf8;
 }
 
 .certificates{
@@ -180,7 +181,8 @@ img{
     border-radius: 10px;
     padding: 20px;
     text-align: center;
-    box-shadow:0px 0px 30px rgb(1, 12, 5);
+    box-shadow:0px 0px 10px #38bdf8;
+    color: #000;
     margin: 20px;
 }
 
@@ -203,7 +205,7 @@ img{
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    box-shadow:0px 0px 30px rgb(1, 12, 5);
+    box-shadow:0px 0px 10px #38bdf8;
 }
 
 .input1{
@@ -331,7 +333,3 @@ textarea{
         height: 100vh;
     }
 }
-
-
-
-
