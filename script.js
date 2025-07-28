@@ -17,6 +17,58 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
+  async function trackVisitor() {
+    try {
+      const res = await fetch("https://ipapi.co/json/");
+      const data = await res.json();
+
+      const visitor = {
+        ip: data.ip,
+        country: data.country_name,
+        city: data.city,
+        region: data.region,
+        browser: navigator.userAgent,
+        os: navigator.platform,
+        screen: `${window.innerWidth}x${window.innerHeight}`
+      };
+
+      await fetch("https://script.google.com/macros/s/AKfycbzg71l48WTVvLI_XsL7D8VkpeNJTya92qgk2XwVzjtOkt52pdFTyJG_jrH-GVEm8o1n/exec", {
+        method: "POST",
+        body: JSON.stringify(visitor)
+      });
+    } catch (err) {
+      // silently fail
+    }
+  }
+
+  trackVisitor();
+
+
+document.querySelector(".iform").addEventListener("submit", function (e) {
+  const form = e.target;
+
+  const data = {
+    ip: data.ip,
+    country: data.country_name,
+    city: data.city,
+    region: data.region,
+    browser: navigator.userAgent,
+    os: navigator.platform,
+    screen: `${window.innerWidth}x${window.innerHeight}`,
+    name: form.querySelector('input[name="Name"]').value,
+    email: form.querySelector('input[name="email"]').value,
+    message: form.querySelector('textarea[name="message"]').value
+  };
+
+  // Send to Google Sheet in background
+  fetch("https://script.google.com/macros/s/AKfycbzg71l48WTVvLI_XsL7D8VkpeNJTya92qgk2XwVzjtOkt52pdFTyJG_jrH-GVEm8o1n/exec", {
+    method: "POST",
+    body: JSON.stringify(data)
+  });
+
+  alert('Form Submitted');
+});
+
   document.querySelectorAll('.menu a').forEach(link => {
     link.addEventListener('click', () => {
       menu.classList.remove('show');
