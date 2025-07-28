@@ -16,8 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   });
 
-
-
  let visitorData = {}; // Used in both tracking + form submission
 
   // 1. Track visitor on load and send
