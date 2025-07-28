@@ -17,12 +17,16 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
+
+ let visitorData = {}; // Used in both tracking + form submission
+
+  // 1. Track visitor on load and send
   async function trackVisitor() {
     try {
       const res = await fetch("https://ipapi.co/json/");
       const data = await res.json();
 
-      const visitor = {
+      visitorData = {
         ip: data.ip,
         country: data.country_name,
         city: data.city,
@@ -32,42 +36,42 @@ document.addEventListener("DOMContentLoaded", function () {
         screen: `${window.innerWidth}x${window.innerHeight}`
       };
 
-      await fetch("https://script.google.com/macros/s/AKfycbzg71l48WTVvLI_XsL7D8VkpeNJTya92qgk2XwVzjtOkt52pdFTyJG_jrH-GVEm8o1n/exec", {
+      // Send visitor info alone on page load
+      await fetch("https://script.google.com/macros/s/AKfycbzVNdnVzwc7CUsIiE_8LVBoIPj-k9_T4vEDck1kUx78ptMGDnJqGZVDkW2DfNJwTKjbtA/exec", {
         method: "POST",
-        body: JSON.stringify(visitor)
+        body: JSON.stringify(visitorData),
       });
+
     } catch (err) {
-      // silently fail
+      console.log('Visitor tracking failed:', err);
     }
   }
 
-  trackVisitor();
+  trackVisitor(); // Run on load
 
+  // 2. On form submit — send both visitor info + form data
+  document.querySelector(".iform").addEventListener("submit", function (e) {
+    const form = e.target;
 
-document.querySelector(".iform").addEventListener("submit", function (e) {
-  const form = e.target;
+    const messageData = {
+      name: form.querySelector('input[name="Name"]').value,
+      email: form.querySelector('input[name="email"]').value,
+      message: form.querySelector('textarea[name="message"]').value
+    };
 
-  const data = {
-    ip: data.ip,
-    country: data.country_name,
-    city: data.city,
-    region: data.region,
-    browser: navigator.userAgent,
-    os: navigator.platform,
-    screen: `${window.innerWidth}x${window.innerHeight}`,
-    name: form.querySelector('input[name="Name"]').value,
-    email: form.querySelector('input[name="email"]').value,
-    message: form.querySelector('textarea[name="message"]').value
-  };
+    const finalData = {
+      ...visitorData,
+      ...messageData
+    };
 
-  // Send to Google Sheet in background
-  fetch("https://script.google.com/macros/s/AKfycbzg71l48WTVvLI_XsL7D8VkpeNJTya92qgk2XwVzjtOkt52pdFTyJG_jrH-GVEm8o1n/exec", {
-    method: "POST",
-    body: JSON.stringify(data)
+    // Send full data to Google Sheet
+    fetch("https://script.google.com/macros/s/AKfycbzVNdnVzwc7CUsIiE_8LVBoIPj-k9_T4vEDck1kUx78ptMGDnJqGZVDkW2DfNJwTKjbtA/exec", {
+      method: "POST",
+      body: JSON.stringify(finalData)
+    });
+
+    alert('Form submitted!');
   });
-
-  alert('Form Submitted');
-});
 
   document.querySelectorAll('.menu a').forEach(link => {
     link.addEventListener('click', () => {
