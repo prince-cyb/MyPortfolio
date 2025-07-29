@@ -1,24 +1,31 @@
-window.scrollTo(0,0);
+// Scroll to top on load
+window.scrollTo(0, 0);
+
+// Show popup message (success or error) - Moved outside to make global
+function showPopup(id, message) {
+  const popup = document.getElementById(id);
+  if (!popup) return;
+  popup.textContent = message;
+  popup.classList.add("show");
+  setTimeout(() => popup.classList.remove("show"), 4000);
+}
+
+// DOM loaded
 document.addEventListener("DOMContentLoaded", function () {
   const hamburger = document.querySelector(".hamburger");
   const menu = document.querySelector(".menu");
   const anime = document.querySelectorAll(".anime");
+  let a = 0;
 
-  var a = 0;
+  // Hamburger toggle
   hamburger.addEventListener("click", () => {
     menu.classList.toggle("show");
-    if (a==0){
-      hamburger.innerHTML="X";
-      a=1;
-    }else{
-      hamburger.innerHTML="&#9776;";
-      a=0;
-    };
+    hamburger.innerHTML = a === 0 ? "X" : "&#9776;";
+    a = a === 0 ? 1 : 0;
   });
 
- let visitorData = {}; // Used in both tracking + form submission
-
-  // 1. Track visitor on load and send
+  // Visitor tracking (store in memory)
+  let visitorData = {};
   async function trackVisitor() {
     try {
       const res = await fetch("https://ipapi.co/json/");
@@ -34,91 +41,103 @@ document.addEventListener("DOMContentLoaded", function () {
         screen: `${window.innerWidth}x${window.innerHeight}`
       };
 
-      // Send visitor info alone on page load
-      await fetch("https://script.google.com/macros/s/AKfycbzVNdnVzwc7CUsIiE_8LVBoIPj-k9_T4vEDck1kUx78ptMGDnJqGZVDkW2DfNJwTKjbtA/exec", {
-        method: "POST",
-        body: JSON.stringify(visitorData),
-      });
-
+      // Send visitor data on page load
+      sendToSheet(visitorData);
     } catch (err) {
-      console.log('Visitor tracking failed:', err);
+      console.log('Too many requests - failed to load visitor data');
+    }
+  }
+  trackVisitor();
+
+  // Send data to Google Sheet
+  async function sendToSheet(data) {
+    try {
+      await fetch("https://script.google.com/macros/s/AKfycbwYXE_7T09lMdGQq4u-A0huixsjY4992ldX2IBdusLndHXu9s20xaJPThKha880p95oZQ/exec", {
+        method: "POST",
+        body: JSON.stringify(data),
+        mode: "no-cors"
+      });
+    } catch (err) {
+      showPopup("popupError", "❌ Submission failed.");
     }
   }
 
-  trackVisitor(); // Run on load
-
-  // 2. On form submit — send both visitor info + form data
-  document.querySelector(".iform").addEventListener("submit", function (e) {
+  // Form submission
+  document.querySelector(".iform").addEventListener("submit", async function (e) {
+    e.preventDefault();
     const form = e.target;
 
-    const messageData = {
-      name: form.querySelector('input[name="Name"]').value,
-      email: form.querySelector('input[name="email"]').value,
-      message: form.querySelector('textarea[name="message"]').value
-    };
+    const name = form.querySelector('input[name="Name"]').value.trim();
+    const email = form.querySelector('input[name="email"]').value.trim();
+    const message = form.querySelector('textarea[name="message"]').value.trim();
 
-    const finalData = {
-      ...visitorData,
-      ...messageData
-    };
+    if (!name || !email || !message) {
+      showPopup("popupError", "❌ Please fill in all fields.");
+      return;
+    }
 
-    // Send full data to Google Sheet
-    fetch("https://script.google.com/macros/s/AKfycbzVNdnVzwc7CUsIiE_8LVBoIPj-k9_T4vEDck1kUx78ptMGDnJqGZVDkW2DfNJwTKjbtA/exec", {
-      method: "POST",
-      body: JSON.stringify(finalData)
-    });
+    const messageData = { name, email, message };
+    const finalData = { ...visitorData, ...messageData };
 
-    alert('Form submitted!');
+    sendToSheet(finalData);
+    showPopup("popupSuccess", "✅ Message sent successfully!");
+    form.reset();
   });
 
+  // Catch clicks on fake/no link
+  document.addEventListener('click', function (e) {
+    if (e.target && e.target.id === 'noLink') {
+      showPopup("popupError", "❌ Sorry!!! No link found here.");
+    }
+  });
+
+  // Menu link click behavior
   document.querySelectorAll('.menu a').forEach(link => {
     link.addEventListener('click', () => {
       menu.classList.remove('show');
-      if(a==1){
-        hamburger.innerHTML="&#9776;";
-        a=0;
-      };
+      if (a === 1) {
+        hamburger.innerHTML = "&#9776;";
+        a = 0;
+      }
     });
   });
 
+  // Intersection animation
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry =>{
-      if (entry.isIntersecting){
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
         entry.target.classList.add('animate');
-      };
+      }
     });
   });
 
-  document.querySelectorAll('.anime').forEach(anime => {
-    observer.observe(anime);
+  anime.forEach(el => observer.observe(el));
+
+  // Hide menu on outside click
+  document.addEventListener('click', event => {
+    const isClickInsideMenu = menu.contains(event.target);
+    const isClickOnHamburger = hamburger.contains(event.target);
+
+    if (!isClickInsideMenu && !isClickOnHamburger && menu.classList.contains('show')) {
+      menu.classList.remove('show');
+      hamburger.innerHTML = "&#9776;";
+      a = 0;
+    }
   });
-
-  document.addEventListener('click', (event) => {
-  const isClickInsideMenu = menu.contains(event.target);
-  const isClickOnHamburger = hamburger.contains(event.target);
-
-  if (!isClickInsideMenu && !isClickOnHamburger && menu.classList.contains('show')) {
-    menu.classList.remove('show');
-    hamburger.innerHTML = "&#9776;";
-    a = 0;
-  }
 });
 
-
-});
-
+// Scroll spy
 window.addEventListener("scroll", () => {
   const sections = document.querySelectorAll("div[id]");
   const navLinks = document.querySelectorAll(".menu a");
-
   let current = "";
+
   sections.forEach(section => {
     const sectionTop = section.offsetTop - 185;
     if (scrollY >= sectionTop) {
       current = section.getAttribute("id");
     }
   });
-
 
   navLinks.forEach(link => {
     link.classList.remove("active");
@@ -128,14 +147,15 @@ window.addEventListener("scroll", () => {
   });
 });
 
+// Prevent scroll restore
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
 }
 
+// Scroll to top on reload
 window.addEventListener("load", () => {
   history.replaceState(null, null, window.location.pathname);
   setTimeout(() => {
     window.scrollTo(0, 0);
   }, 50);
 });
-
