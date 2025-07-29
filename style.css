@@ -181,6 +181,7 @@ a{
     border-radius: 50%;
     position: relative;
     object-fit: contain;
+    pointer-events: none;
 }
 
 .code-elements {
