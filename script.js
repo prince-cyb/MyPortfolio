@@ -1,4 +1,38 @@
-// Scroll to top on load
+const typed = document.querySelector('.typed-text');
+const roles = ['Developer', 'Coder', 'Problem Solver', 'Web Designer'];
+let roleIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+
+function type() {
+    const currentRole = roles[roleIndex];
+    
+    if (isDeleting) {
+        typed.textContent = currentRole.substring(0, charIndex - 1);
+        charIndex--;
+    } else {
+        typed.textContent = currentRole.substring(0, charIndex + 1);
+        charIndex++;
+    }
+
+    let typingSpeed = isDeleting ? 100 : 200;
+
+    if (!isDeleting && charIndex === currentRole.length) {
+        typingSpeed = 2000; // Pause at end of word
+        isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+        typingSpeed = 500; // Pause before starting new word
+    }
+
+    setTimeout(type, typingSpeed);
+}
+
+// Start the typing animation when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(type, 1000);
+});
 window.scrollTo(0, 0);
 
 // Show popup message (success or error) - Moved outside to make global
