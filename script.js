@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const finalData = { ...visitorData, ...messageData };
 
     sendToSheet(finalData);
-    showPopup("popupSuccess", "âœ… Message sent successfully!");
+    showPopup("popupSuccess", "… Message sent successfully!");
     form.reset();
   });
 
