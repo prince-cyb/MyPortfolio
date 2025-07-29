@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="popupSuccess" class="popup popup-success">✅ Message sent successfully!</div>
+<div id="popupError" class="popup popup-error">❌ Failed to send message. Please try again.</div>
     <div class="main">
         <div class="header">
             <div class="heading">Welcome to my portfolio</div>
@@ -31,7 +33,7 @@
         <div class="about" id="about">
             <div class="heading"><h2>About Me</h2></div>
             <div class="myabout">
-                My name is Prince Chaurasiya I am currently pursuing BCA from IICS college in Prayagraj by PRSU.I have good Coding knowledge of HTML , CSS , JavaScript and Python. I have well knowledge of system and about there working. I am also good in problem solving and logic building as well as Networking. I also have some issues for connecting people that only one thing that make me feel weak. If You are satisfied with my details so tell me in my contact page.
+                My name is Prince Chaurasiya I am currently persuing BCA from IICS collage in Prayagraj by PRSU.I have good Coding knowledge of HTML , CSS , JavaScript and Python. I have well knowledge of system and about there working. I am also good in problem solving and logic building as well as Networking. I also have some issues for connecting people that only one thing that make me feel weak. If You are satisfied with my details so tell me in my contact page.
             </div>
             <div class="social">
                 <button class="button1" style="background-color: crimson; margin: 10px;" onclick="window.open('https://www.instagram.com/hackofasia/', '_blank', 'noopener noreferrer');">Instagram</button>
@@ -42,21 +44,21 @@
         <div class="projects" id="projects">
             <div class="project anime from-down">
                 <div class="project-heading"><h4>To Do App</h4></div><br>
-                <div class="about-project">This is my first Project made by me completely.In this project user can add their daily tasks and check the progress.<br><br><br></div>
+                <div class="about-project">This is my first Project made by me completly.In this project user can add there daily tasks and check the progress.<br><br><br></div>
                 <button class="button1" style="width: 200px;
                 margin: 30px 25px;" onclick="window.open('https://prince-cyb.github.io/ToDoApp/', '_blank', 'noopener noreferrer');">View Project</button>
             </div>
             <div class="project anime from-down">
-                <div class="project-heading"><h4>Electricity Billing System</h4></div><br>
-                <div class="about-project">This is a project that calculates bill details and prices.It fetchs real data from real Electrcity site and redirect to their payment page to make payment.</div>
+                <div class="project-heading"><h4>Electrcity Billing System</h4></div><br>
+                <div class="about-project">This is a project that calculates bill datails and prices.It fetchs real data from real Electrcity site and redirect to thier payment page to make payment.</div>
                 <button class="button1" style="width: 200px;
-                margin: 30px 25px;" onclick="alert(`Error 404 no link found !`)">View Project</button>
+                margin: 30px 25px;" id="noLink">View Project</button>
             </div>
             <div class="project anime from-down">
-                <div class="project-heading"><h4>Coming Soon...</h4></div><br>
-                <div class="about-project"></div>
-                <!-- <button class="button1" style="width: 200px;
-                margin: 30px 25px;" onclick="alert(`Error 404 no link found !`)">View Project</button> -->
+                <div class="project-heading"><h4>Weather App</h4></div><br>
+                <div class="about-project">Happy to Share This Project ! This is my weather app created by me with api. It helps to get weather from api also it enhanced my api handling knowledge.</div>
+                <button class="button1" style="width: 200px;
+                margin: 30px 25px;" onclick="window.open('https://prince-cyb.github.io/Weather/', '_blank', 'noopener noreferrer');">View Project</button>
             </div>
         </div>
         <div class="certificates" id="certificates">
@@ -95,19 +97,19 @@
                 <div class="input1">
                     <label>
                     Your Name:
-                    <input type="text" name="Name">
+                    <input type="text" placeholder="Enter Your Name" name="Name">
                 </label>
                 </div>
                 <div class="input1">
                     <label>
                     Your email:
-                        <input type="email" name="email">
+                        <input type="email" placeholder="Enter Your Email" name="email">
                 </label>
                 </div>
                 <div class="inputbox">
                     <label>
                     Your message:
-                <textarea name="message"></textarea>
+                <textarea name="message" placeholder="Type Your Message Here"></textarea>
                 </label>
                 </div>
                 <button class="button1" type="submit">Send</button>
