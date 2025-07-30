@@ -20,3 +20,13 @@ Hi, I'm Prince Cyb. I'm passionate about coding, solving problems, and building 
 A brief description of the project, technologies used, and the problem it solves.
 
 ### [Project Name 2](link-to-project)
+A brief description of the project, technologies used, and the problem it solves.
+
+*(Add more projects as needed)*
+
+## 📈 Experience
+
+- **Company/Organization Name** – Role (Year-Year)
+  - Brief description of contribution and achievements.
+
+- **Freelance/Volunteer Work**  
