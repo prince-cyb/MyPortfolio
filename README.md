@@ -58,7 +58,7 @@ A brief description of the project, technologies used, and the problem it solves
 ## 📬 Contact
 
 - **Email:** your.email@example.com
-- **LinkedIn:** [Your LinkedIn](https://linkedin.com/in/yourprofile)
+
 
 ---
 
