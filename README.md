@@ -14,8 +14,7 @@ Hi, I'm Prince Cyb. I'm passionate about coding, solving problems, and building 
 
 ## 📂 Projects
 
-### [Project Portfolio] 
-<a href="princex.dpdns.org">
+### [Project Portfolio](princex.dpdns.org)
 
 ## 📈 Experience
 
