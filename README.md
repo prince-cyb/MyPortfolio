@@ -57,7 +57,7 @@ A brief description of the project, technologies used, and the problem it solves
 
 ## 📬 Contact
 
-- **Email:** your.email@example.com
+- **Email:** codedbyprince@gmail.com
 
 
 ---
