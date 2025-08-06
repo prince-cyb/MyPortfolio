@@ -14,24 +14,12 @@ Hi, I'm Prince Cyb. I'm passionate about coding, solving problems, and building 
 
 ## 📂 Projects
 
-### [Project Name 1](link-to-project)
-A brief description of the project, technologies used, and the problem it solves.
+### [Project Portfolio] princex.dpdns.org
 
-### [Project Name 2](link-to-project)
-A brief description of the project, technologies used, and the problem it solves.
-
-*(Add more projects as needed)*
 
 ## 📈 Experience
 
-- **Company/Organization Name** – Role (Year-Year)
-  - Brief description of contribution and achievements.
-
-- **Freelance/Volunteer Work**  
-  - Brief description of work and technologies used.
-A brief description of the project, technologies used, and the problem it solves.
-
-*(Add more projects as needed)*
+Self Learning with own experience
 
 ## 📈 Experience
 
@@ -47,7 +35,7 @@ A brief description of the project, technologies used, and the problem it solves
 - Collaborate with other developers
 - Build scalable and efficient solutions
 
-## 📬 Contact
+
 
 ## 🎯 Goals
 
